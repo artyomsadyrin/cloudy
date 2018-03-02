@@ -1,0 +1,6 @@
+framework module Pods_cloudy {
+  umbrella header "Pods-cloudy-umbrella.h"
+
+  export *
+  module * { export * }
+}
