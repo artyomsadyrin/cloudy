@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         weatherTable.delegate = self
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.updateCityTable), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.updateCityTable), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         if let filepath = Bundle.main.path(forResource: "cityList", ofType: "json") {
             do {
