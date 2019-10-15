@@ -25,7 +25,6 @@ class WeatherGetter {
         
         let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)?q=\(replacedCity)&APPID=\(openWeatherMapAPIKey)")!
         
-        // The data task retrieves the data.
         let dataTask = session.dataTask(with: weatherRequestURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
