@@ -15,7 +15,7 @@ class WeatherGetter {
     //#error("Need to add you API Key")
     private let openWeatherMapAPIKey = ""
     
-    func getWeather(city: String, completion: @escaping (String?) -> Void) {
+    func getWeather(city: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         var dataString = String()
                 
@@ -31,14 +31,14 @@ class WeatherGetter {
             if let error = error {
                 print("Error:\n\(error)")
                 DispatchQueue.main.async {
-                    completion(nil)
+                    completion(.failure(error))
                 }
             }
             else {
                     dataString = String(data: data!, encoding: String.Encoding.utf8)!
                     print("Human-readable data:\n\(dataString)")
                     DispatchQueue.main.async {
-                        completion(dataString)
+                        completion(.success(dataString))
                     }
                 }
             

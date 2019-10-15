@@ -34,27 +34,28 @@ class City {
         
         let weather = WeatherGetter()
         
-        weather.getWeather(city: cityName, completion: { (weatherInCity) in
-            guard let weatherInCity = weatherInCity else {
-                self.failed = true
-                return
-            }
-            
-            if let data = weatherInCity.data(using: .utf8) {
-                if let json = try? JSON(data: data) {
-                    if let temperature = json["main"]["temp"].int {
-                        self.temperature = String(temperature)
-                        self.delegate?.updateCityTable()
-                    }
-                    if let pressure = json["main"]["pressure"].int {
-                        self.pressure = String(pressure)
-                        
-                    }
-                    if let humidity = json["main"]["humidity"].int {
-                        self.humidity = String(humidity)
-                        
+        weather.getWeather(city: cityName, completion: { result in
+            switch result {
+            case .success(let weatherInCity):
+                if let data = weatherInCity.data(using: .utf8) {
+                    if let json = try? JSON(data: data) {
+                        if let temperature = json["main"]["temp"].int {
+                            self.temperature = String(temperature)
+                            self.delegate?.updateCityTable()
+                        }
+                        if let pressure = json["main"]["pressure"].int {
+                            self.pressure = String(pressure)
+                            
+                        }
+                        if let humidity = json["main"]["humidity"].int {
+                            self.humidity = String(humidity)
+                            
+                        }
                     }
                 }
+            case .failure(_):
+                self.failed = true
+                return
             }
         })
     }
