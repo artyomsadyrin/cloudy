@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class WeatherGetter {
     
@@ -18,7 +17,7 @@ class WeatherGetter {
     func getWeather(city: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         var dataString = String()
-                
+        
         let replacedCity = city.replacingOccurrences(of: " ", with: "%20")
         
         let session = URLSession.shared
@@ -34,14 +33,14 @@ class WeatherGetter {
                 }
             }
             else {
-                    dataString = String(data: data!, encoding: String.Encoding.utf8)!
-                    print("Human-readable data:\n\(dataString)")
-                    DispatchQueue.main.async {
-                        completion(.success(dataString))
-                    }
+                dataString = String(data: data!, encoding: String.Encoding.utf8)!
+                print("Human-readable data:\n\(dataString)")
+                DispatchQueue.main.async {
+                    completion(.success(dataString))
                 }
-            
             }
+            
+        }
         dataTask.resume()
     }
 }
