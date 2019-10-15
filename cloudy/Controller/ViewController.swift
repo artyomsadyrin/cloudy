@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var weatherTable: UITableView!
     var weatherInCityArr = [City]()
-    var citiesName = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if let json = try? JSON(data: data) {
                         for item in json["City"].arrayValue {
                             if let cityName = item.rawString() {
-                                citiesName.append(cityName)
                                 let newCity = City(city: cityName)
                                 weatherInCityArr.append(newCity)
                                 newCity.getWeatherInfo()

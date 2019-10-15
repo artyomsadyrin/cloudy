@@ -12,7 +12,7 @@ import SwiftyJSON
 class WeatherGetter {
     
     private let openWeatherMapBaseURL = "https://api.openweathermap.org/data/2.5/weather"
-    //#error("Need to add you API Key")
+    #error("Need to add you API Key")
     private let openWeatherMapAPIKey = ""
     
     func getWeather(city: String, completion: @escaping (Result<String, Error>) -> Void) {
